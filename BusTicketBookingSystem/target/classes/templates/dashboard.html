@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a href="/" class="logo navbar-brand text-white"><i
+			class="fas fa-bus-alt fa-lg mr-2"></i> <span class="font-weight-bold">BusEase</span></a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="/bus-schedule">View
+						Bus Schedule</a></li>
+				<li class="nav-item"><a class="nav-link" href="/book-ticket">Book
+						a Ticket</a></li>
+				<li class="nav-item"><a class="nav-link" href="/view-bookings">View
+						Bookings</a></li>
+				<li class="nav-item"><a href="#" class="nav-link">Welcome,
+						<span th:text="${session.user?.name} ?: 'Guest'"></span>
+				</a></li>
+				<li class="nav-item">
+					<form th:action="@{/logout}">
+						<button type="submit" class="btn btn-danger ml-2">
+							<i class="fas fa-sign-out-alt"></i> Logout
+						</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container mt-5">
+		<h1>User Dashboard</h1>
+	</div>
+</body>
+</html>

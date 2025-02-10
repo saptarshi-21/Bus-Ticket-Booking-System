@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Bookings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a href="/" class="logo navbar-brand text-white"><i class="fas fa-bus-alt fa-lg mr-2"></i>
+		 <span class="font-weight-bold">BusEase</span></a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/manage-bus-schedules">Manage Bus Schedules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/manage-users">Manage Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/manage-bookings">Manage Bookings</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1>Manage Bookings</h1>
+        <table class="table table-dark table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>User</th>
+                    <th>Bus Schedule</th>
+                    <th>Booking Time</th>
+                    <th>Seat Number</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.bookingId}"></td>
+                    <td th:text="${booking.user.name}"></td>
+                    <td th:text="${booking.busSchedule.busName + ' - ' + booking.busSchedule.source + ' to ' + booking.busSchedule.destination}"></td>
+                    <td th:text="${booking.bookingTime}"></td>
+                    <td th:text="${booking.seatNumber}"></td>
+                    <td th:text="${booking.status}"></td>
+                    <td>
+                        <form action="/admin/manage-bookings/confirm" method="post" style="display:inline;">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
+                            <button type="submit" class="btn btn-success">Confirm</button>
+                        </form>
+                        <form action="/admin/manage-bookings/cancel" method="post" style="display:inline;">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
