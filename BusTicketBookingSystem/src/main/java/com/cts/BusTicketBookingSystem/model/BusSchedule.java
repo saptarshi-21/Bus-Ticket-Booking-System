@@ -31,11 +31,9 @@ public class BusSchedule {
     @Column(name = "available_seats", nullable = false)
     private int availableSeats;
 
-    // Relationship with Booking
     @OneToMany(mappedBy = "busSchedule", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Booking> bookings;
 
-    // Constructors
     public BusSchedule() {
     }
 
